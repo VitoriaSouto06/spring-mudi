@@ -5,12 +5,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import br.com.vitoriastudies.mudi.model.enums.StatusPedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="tb_pedido")
@@ -22,8 +27,10 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	@Column(name="nome_produto")
 	private String nomeProduto;
+	
 	
 	@Column(name="valor_negociado")
 	private BigDecimal valorNegociado;
@@ -31,31 +38,36 @@ public class Pedido implements Serializable{
 	@Column(name="data_entrega")
 	private LocalDate dataDaEntrega;
 	
+	@NotBlank
 	@Column(name="url_produto",length=900)
-	private String urlPorduto;
+	private String urlProduto;
 	
+	@NotBlank
 	@Column(name="url_imagem",length=900)
 	private String urlImagem;
 	
 	@Column(name="descricao",length=1500)
 	private String descricao;
 	
+	@Enumerated(EnumType.STRING)
+	private StatusPedido statusPedido;
 	
 	public Pedido() {
 		
 	}
 	
 	
-	public Pedido(Long id,String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlPorduto,
-			String urlImagem, String descricao) {
+	public Pedido(Long id,String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto,
+			String urlImagem, String descricao,StatusPedido statusPedido) {
 		super();
 		this.id = id;
 		this.nomeProduto = nomeProduto;
 		this.valorNegociado = valorNegociado;
 		this.dataDaEntrega = dataDaEntrega;
-		this.urlPorduto = urlPorduto;
+		this.urlProduto = urlProduto;
 		this.urlImagem = urlImagem;
 		this.descricao = descricao;
+		this.statusPedido = statusPedido;
 	}
 
 
@@ -99,13 +111,13 @@ public class Pedido implements Serializable{
 	}
 
 
-	public String getUrlPorduto() {
-		return urlPorduto;
+	public String getUrlProduto() {
+		return urlProduto;
 	}
 
 
-	public void setUrlPorduto(String urlPorduto) {
-		this.urlPorduto = urlPorduto;
+	public void setUrlProduto(String urlProduto) {
+		this.urlProduto = urlProduto;
 	}
 
 
@@ -126,6 +138,17 @@ public class Pedido implements Serializable{
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+
+
+	public StatusPedido getStatusPedido() {
+		return statusPedido;
+	}
+
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido;
 	}
 
 

@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+input:focus{
+	border-color: blue !important;
+}
+input:valid{
+	border-color: green;
+}
+
+input:invalid{
+	border-color: red;;
+}
