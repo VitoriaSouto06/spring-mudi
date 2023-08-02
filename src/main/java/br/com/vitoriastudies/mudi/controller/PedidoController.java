@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,10 +53,9 @@ public class PedidoController {
 	}
 	}
 	
-	@GetMapping("aguardando")
-	public String aguardando(Model model) {
-		StatusPedido status = StatusPedido.AGUARDANDO;
-		List<Pedido> listaPedidos = pedidoService.buscarStatus(status);
+	@GetMapping("/{status}")
+	public String aguardando(@PathVariable("status") String status, Model model) {
+		List<Pedido> listaPedidos = pedidoService.buscarStatus(StatusPedido.valueOf(status.toUpperCase()));
 		model.addAttribute("listaPedidos", listaPedidos);
 		return "pedido/pedidos";
 
