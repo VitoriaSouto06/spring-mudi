@@ -57,6 +57,7 @@ public class PedidoController {
 	public String aguardando(@PathVariable("status") String status, Model model) {
 		List<Pedido> listaPedidos = pedidoService.buscarStatus(StatusPedido.valueOf(status.toUpperCase()));
 		model.addAttribute("listaPedidos", listaPedidos);
+		model.addAttribute("status", status);
 		return "pedido/pedidos";
 
 		
